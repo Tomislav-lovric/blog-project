@@ -48,4 +48,12 @@ public class GlobalExceptionHandler {
         return errorMap;
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({PostTitleAlreadyExistsException.class})
+    public Map<String, String> handleExistingPostTitle(PostTitleAlreadyExistsException ex) {
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("Error", ex.getMessage());
+        return errorMap;
+    }
+
 }
