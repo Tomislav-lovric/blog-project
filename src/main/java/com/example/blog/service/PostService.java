@@ -115,6 +115,24 @@ public class PostService {
                 .build();
     }
 
+    public PostResponse getPost(String postTitle, String bearerToken) {
+        String username = jwtService.extractUsername(bearerToken.substring(7));
+        var user = userRepository.findUserByEmail(username);
+
+        if (!postRepository.existsByTitleAndUser(postTitle, user)) {
+            throw new PostNotFoundException("Post with the title '" + postTitle + "' not found!");
+        }
+
+        var post = postRepository.findByTitleAndUser(postTitle, user);
+
+        return PostResponse.builder()
+                .title(post.getTitle())
+                .content(post.getContent())
+                .createdAt(post.getCreatedAt())
+                .updatedAt(post.getUpdatedAt())
+                .build();
+    }
+
     @Transactional
     public String deletePost(String postTitle, String bearerToken) {
         String username = jwtService.extractUsername(bearerToken.substring(7));
@@ -128,4 +146,5 @@ public class PostService {
 
         return "Post with the title '" + postTitle + "' deleted";
     }
+
 }

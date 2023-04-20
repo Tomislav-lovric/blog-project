@@ -24,6 +24,14 @@ public class PostController {
         return new ResponseEntity<>(service.createPost(request, bearerToken), HttpStatus.CREATED);
     }
 
+    @GetMapping("/{postTitle}")
+    public ResponseEntity<PostResponse> getPost(
+            @PathVariable String postTitle,
+            @RequestHeader("Authorization") String bearerToken
+    ) {
+        return ResponseEntity.ok(service.getPost(postTitle, bearerToken));
+    }
+
     @DeleteMapping("/{postTitle}")
     public ResponseEntity<String> deletePost(
             @PathVariable String postTitle,
