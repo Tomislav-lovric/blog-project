@@ -64,4 +64,12 @@ public class GlobalExceptionHandler {
         return errorMap;
     }
 
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler({PostNotFoundException.class})
+    public Map<String, String> handleNonExistingPost(PostNotFoundException ex) {
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("Error", ex.getMessage());
+        return errorMap;
+    }
+
 }

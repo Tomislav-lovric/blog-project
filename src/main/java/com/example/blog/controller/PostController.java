@@ -17,11 +17,19 @@ public class PostController {
     private final PostService service;
 
     @PostMapping("/create")
-    public ResponseEntity<PostResponse> create(
+    public ResponseEntity<PostResponse> createPost(
             @RequestBody @Valid PostRequest request,
             @RequestHeader("Authorization") String bearerToken
     ) {
-        return new ResponseEntity<>(service.create(request, bearerToken), HttpStatus.CREATED);
+        return new ResponseEntity<>(service.createPost(request, bearerToken), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{postTitle}")
+    public ResponseEntity<String> deletePost(
+            @PathVariable String postTitle,
+            @RequestHeader("Authorization") String bearerToken
+    ) {
+        return ResponseEntity.ok(service.deletePost(postTitle, bearerToken));
     }
 
 }

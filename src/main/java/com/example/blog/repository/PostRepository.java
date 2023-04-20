@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface PostRepository extends JpaRepository<Post, Long> {
 
     boolean existsByTitleAndUser(String title, User user);
+
+    void deleteByTitleAndUser(String title, User user);
 }

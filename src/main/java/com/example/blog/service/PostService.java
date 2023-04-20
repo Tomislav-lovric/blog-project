@@ -4,12 +4,14 @@ import com.example.blog.dto.PostRequest;
 import com.example.blog.dto.PostResponse;
 import com.example.blog.entity.*;
 import com.example.blog.exception.CategoryNotFoundException;
+import com.example.blog.exception.PostNotFoundException;
 import com.example.blog.exception.PostTitleAlreadyExistsException;
 import com.example.blog.repository.CategoryRepository;
 import com.example.blog.repository.PostRepository;
 import com.example.blog.repository.TagRepository;
 import com.example.blog.repository.UserRepository;
 import com.example.blog.security.JwtService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +33,7 @@ public class PostService {
     //Quite few things are happening in this method therefore there may be more comments
     //than usual just to explain what is happening (or should I say what I was thinking
     //when writing the code)
-    public PostResponse create(PostRequest request, String bearerToken) {
+    public PostResponse createPost(PostRequest request, String bearerToken) {
         // username is users email in our case
         String username = jwtService.extractUsername(bearerToken.substring(7));
         var user = userRepository.findUserByEmail(username);
@@ -113,4 +115,17 @@ public class PostService {
                 .build();
     }
 
+    @Transactional
+    public String deletePost(String postTitle, String bearerToken) {
+        String username = jwtService.extractUsername(bearerToken.substring(7));
+        var user = userRepository.findUserByEmail(username);
+
+        if (!postRepository.existsByTitleAndUser(postTitle, user)) {
+            throw new PostNotFoundException("Post with the title '" + postTitle + "' not found!");
+        }
+
+        postRepository.deleteByTitleAndUser(postTitle, user);
+
+        return "Post with the title '" + postTitle + "' deleted";
+    }
 }
