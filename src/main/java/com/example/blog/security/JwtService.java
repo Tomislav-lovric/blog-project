@@ -19,13 +19,13 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class JwtService {
 
-    private final static String SECRET_KEY = "3F4428472B4B6250645367566B5970337336763979244226452948404D635166";
+    private final static String SECRET_KEY = "66556A586E3272357538782F413F4428472B4B6250655367566B597033733676";
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
-    public  <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
@@ -35,12 +35,12 @@ public class JwtService {
     }
 
     public String generateToken(
-            Map<String, Object> extractClaims,
+            Map<String, Object> extraClaims,
             UserDetails userDetails
     ) {
         return Jwts
                 .builder()
-                .setClaims(extractClaims)
+                .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
