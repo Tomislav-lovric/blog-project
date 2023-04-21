@@ -2,6 +2,7 @@ package com.example.blog.service;
 
 import com.example.blog.dto.PostRequest;
 import com.example.blog.dto.PostResponse;
+import com.example.blog.dto.PostUpdateRequest;
 import com.example.blog.entity.*;
 import com.example.blog.exception.CategoryNotFoundException;
 import com.example.blog.exception.PostNotFoundException;
@@ -59,7 +60,7 @@ public class PostService {
         List<PostCategory> postCategories = new ArrayList<>();
         for (String category : request.getCategories()) {
             if (!categoryRepository.existsByName(category)) {
-                throw new CategoryNotFoundException("Category by the name" + category + " not found!");
+                throw new CategoryNotFoundException("Category by the name " + category + " not found!");
             }
 
             var categoryToAdd = categoryRepository.findByName(category);
@@ -115,7 +116,37 @@ public class PostService {
                 .build();
     }
 
-    public PostResponse getPost(String postTitle, String bearerToken) {
+    public PostResponse getPost(String postTitle) {
+
+        if (!postRepository.existsByTitle(postTitle)) {
+            throw new PostNotFoundException("Post with the title '" + postTitle + "' not found!");
+        }
+
+        var post = postRepository.findByTitle(postTitle);
+
+        //todo probably should make it so it returns categories and tags also
+        // should note that will require to update PostResponse Class
+        return PostResponse.builder()
+                .title(post.getTitle())
+                .content(post.getContent())
+                .createdAt(post.getCreatedAt())
+                .updatedAt(post.getUpdatedAt())
+                .build();
+    }
+
+    public List<PostResponse> getAllPosts() {
+        List<Post> posts = postRepository.findAll();
+        return posts.stream()
+                .map(post -> PostResponse.builder()
+                        .title(post.getTitle())
+                        .content(post.getContent())
+                        .createdAt(post.getCreatedAt())
+                        .updatedAt(post.getUpdatedAt())
+                        .build()).toList();
+    }
+
+    @Transactional
+    public PostResponse updatePost(String postTitle, PostUpdateRequest request, String bearerToken) {
         String username = jwtService.extractUsername(bearerToken.substring(7));
         var user = userRepository.findUserByEmail(username);
 
@@ -124,6 +155,29 @@ public class PostService {
         }
 
         var post = postRepository.findByTitleAndUser(postTitle, user);
+
+        //For title we check weather it is null and if it is the equal to the one we are updating
+        //if both checks pass we then check if new title already exists, if it does not update post title
+        //The reason we are checking if new title equals the old one is because of our existsByTitleAndUser
+        //if they are the same exception will be thrown, however like this we are simply skipping this code
+        if (request.getTitle() != null && !request.getTitle().equals(postTitle)) {
+            if (postRepository.existsByTitleAndUser(request.getTitle(), user)) {
+                throw new PostTitleAlreadyExistsException(
+                        "Post with title '" + request.getTitle() + "' already exists, please use different title"
+                );
+            }
+            post.setTitle(request.getTitle());
+        }
+
+        //For content on the other hand we are not checking if it is same as the one being updaated
+        if (request.getContent() != null) {
+            post.setContent(request.getContent());
+        }
+
+        //we always update posts updated at field regardless if user updated anything or not
+        //just for simplicity’s sake (although we could make it update only if one of the fields has been updated)
+        post.setUpdatedAt(LocalDateTime.now());
+        postRepository.save(post);
 
         return PostResponse.builder()
                 .title(post.getTitle())
@@ -146,5 +200,4 @@ public class PostService {
 
         return "Post with the title '" + postTitle + "' deleted";
     }
-
 }
