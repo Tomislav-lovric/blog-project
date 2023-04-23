@@ -58,4 +58,6 @@ public class PostController {
         return ResponseEntity.ok(service.deletePost(postTitle, bearerToken));
     }
 
+    //todo Maybe make an endpoints for searching for posts based on their categories or tags
+
 }
