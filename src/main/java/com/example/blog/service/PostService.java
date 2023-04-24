@@ -124,7 +124,7 @@ public class PostService {
 
         var post = postRepository.findByTitle(postTitle);
 
-        //todo probably should make it so it returns categories and tags also
+        //todo probably should make it, so it returns categories and tags also
         // should note that will require to update PostResponse Class
         return PostResponse.builder()
                 .title(post.getTitle())
@@ -169,7 +169,7 @@ public class PostService {
             post.setTitle(request.getTitle());
         }
 
-        //For content on the other hand we are not checking if it is same as the one being updaated
+        //For content on the other hand we are not checking if it is same as the one being updated
         if (request.getContent() != null) {
             post.setContent(request.getContent());
         }

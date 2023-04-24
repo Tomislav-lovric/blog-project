@@ -56,4 +56,32 @@ public class CategoryController {
     ) {
         return ResponseEntity.ok(service.deleteCategory(categoryName));
     }
+
+    @PutMapping("/{postTitle}/categories/add")
+    public ResponseEntity<String> addCategoryToPost(
+            @PathVariable String postTitle,
+            @RequestBody @Valid CategoryDto request,
+            @RequestHeader("Authorization") String bearerToken
+    ) {
+        return ResponseEntity.ok(service.addCategoryToPost(postTitle, request, bearerToken));
+    }
+
+    @PutMapping("/{postTitle}/categories/add-multi")
+    public ResponseEntity<String> addCategoriesToPost(
+            @PathVariable String postTitle,
+            @RequestBody @Valid List<CategoryDto> request,
+            @RequestHeader("Authorization") String bearerToken
+    ) {
+        request.forEach(categoryDto -> service.addCategoryToPost(postTitle, categoryDto, bearerToken));
+        return ResponseEntity.ok("All categories added to the post '" + postTitle + "'");
+    }
+
+    @DeleteMapping("/{postTitle}/categories/delete")
+    public ResponseEntity<String> deleteCategoriesFromPost(
+            @PathVariable String postTitle,
+            @RequestBody @Valid CategoryDto request,
+            @RequestHeader("Authorization") String bearerToken
+    ) {
+        return ResponseEntity.ok(service.deleteCategoryFromPost(postTitle, request, bearerToken));
+    }
 }
