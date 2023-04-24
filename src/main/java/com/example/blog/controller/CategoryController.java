@@ -42,6 +42,8 @@ public class CategoryController {
         return ResponseEntity.ok(service.searchCategory(category));
     }
 
+    //todo Get all tags
+
     @PutMapping("/categories/update/{categoryName}")
     public ResponseEntity<String> updateCategory(
             @PathVariable String categoryName,
