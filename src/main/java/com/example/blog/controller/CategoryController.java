@@ -42,7 +42,10 @@ public class CategoryController {
         return ResponseEntity.ok(service.searchCategory(category));
     }
 
-    //todo Get all tags
+    @GetMapping("/categories/all")
+    public ResponseEntity<List<CategoryDto>> getAllCategories() {
+        return ResponseEntity.ok(service.getAllCategories());
+    }
 
     @PutMapping("/categories/update/{categoryName}")
     public ResponseEntity<String> updateCategory(

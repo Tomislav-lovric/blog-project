@@ -2,7 +2,6 @@ package com.example.blog.service;
 
 import com.example.blog.dto.TagDto;
 import com.example.blog.entity.Tag;
-import com.example.blog.exception.CategoryAlreadyExistsException;
 import com.example.blog.exception.TagAlreadyExistsException;
 import com.example.blog.exception.TagNotFoundException;
 import com.example.blog.repository.PostRepository;
@@ -44,9 +43,6 @@ public class TagService {
 
     public List<TagDto> getAllTags() {
         List<Tag> tags = tagRepository.findAll();
-//        if (tags.isEmpty()) {
-//            throw new TagNotFoundException("Tags not found");
-//        }
 
         return tags.stream().map(tag -> new TagDto(tag.getName())).toList();
     }

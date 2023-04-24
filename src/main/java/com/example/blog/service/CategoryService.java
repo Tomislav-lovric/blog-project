@@ -14,6 +14,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CategoryService {
@@ -41,6 +43,12 @@ public class CategoryService {
             return "Category '" + category + "' does not exist";
         }
         return "Category '" + category + "' does exists";
+    }
+
+    public List<CategoryDto> getAllCategories() {
+        List<Category> categories = categoryRepository.findAll();
+
+        return categories.stream().map(category -> new CategoryDto(category.getName())).toList();
     }
 
     @Transactional
