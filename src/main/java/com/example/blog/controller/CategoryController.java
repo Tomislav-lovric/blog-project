@@ -35,6 +35,7 @@ public class CategoryController {
         return new ResponseEntity<>(categories, HttpStatus.CREATED);
     }
 
+    //Not secured endpoint
     @GetMapping("/categories/search")
     public ResponseEntity<String> searchCategory(
             @RequestParam String category
@@ -42,6 +43,7 @@ public class CategoryController {
         return ResponseEntity.ok(service.searchCategory(category));
     }
 
+    //Not secured endpoint
     @GetMapping("/categories/all")
     public ResponseEntity<List<CategoryDto>> getAllCategories() {
         return ResponseEntity.ok(service.getAllCategories());

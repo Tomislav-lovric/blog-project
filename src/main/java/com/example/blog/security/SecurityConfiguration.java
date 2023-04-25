@@ -24,7 +24,15 @@ public class SecurityConfiguration {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v1/user/**", "/api/v1/posts/all", "/api/v1/posts/{postTitle}")
+                .requestMatchers(
+                        "/api/v1/user/**",
+                        "/api/v1/posts/all",
+                        "/api/v1/posts/{postTitle}",
+                        "/api/v1/posts/categories/search",
+                        "/api/v1/posts/categories/all",
+                        "/api/v1/posts/tags/search",
+                        "/api/v1/posts/tags/all"
+                )
                 .permitAll()
                 .anyRequest()
                 .authenticated()

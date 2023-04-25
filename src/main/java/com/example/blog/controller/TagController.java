@@ -33,6 +33,7 @@ public class TagController {
         return new ResponseEntity<>(tags, HttpStatus.CREATED);
     }
 
+    //Not secured endpoint
     @GetMapping("/tags/search")
     public ResponseEntity<String> searchTag(
             @RequestParam String tag
@@ -40,6 +41,7 @@ public class TagController {
         return ResponseEntity.ok(service.searchTag(tag));
     }
 
+    //Not secured endpoint
     @GetMapping("/tags/all")
     public ResponseEntity<List<TagDto>> getAllTags() {
         return ResponseEntity.ok(service.getAllTags());
