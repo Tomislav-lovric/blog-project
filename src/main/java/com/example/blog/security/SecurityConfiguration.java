@@ -31,7 +31,9 @@ public class SecurityConfiguration {
                         "/api/v1/posts/categories/search",
                         "/api/v1/posts/categories/all",
                         "/api/v1/posts/tags/search",
-                        "/api/v1/posts/tags/all"
+                        "/api/v1/posts/tags/all",
+                        "/api/v1/posts/{postTitle}/comments/{commentId}",
+                        "/api/v1/posts/{postTitle}/comments/all"
                 )
                 .permitAll()
                 .anyRequest()
