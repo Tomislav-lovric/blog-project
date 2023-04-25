@@ -59,4 +59,32 @@ public class TagController {
     ) {
         return ResponseEntity.ok(service.deleteTag(tagName));
     }
+
+    @PutMapping("/{postTitle}/tags/add")
+    public ResponseEntity<String> addTagToPost(
+            @PathVariable String postTitle,
+            @RequestBody @Valid TagDto request,
+            @RequestHeader("Authorization") String bearerToken
+    ) {
+        return ResponseEntity.ok(service.addTagToPost(postTitle, request, bearerToken));
+    }
+
+    @PutMapping("/{postTitle}/tags/add-multi")
+    public ResponseEntity<String> addTagsToPost(
+            @PathVariable String postTitle,
+            @RequestBody @Valid List<TagDto> request,
+            @RequestHeader("Authorization") String bearerToken
+    ) {
+        request.forEach(tagDto -> service.addTagToPost(postTitle, tagDto, bearerToken));
+        return ResponseEntity.ok("All categories added to the post '" + postTitle + "'");
+    }
+
+    @DeleteMapping("/{postTitle}/tags/delete")
+    public ResponseEntity<String> deleteTagFromPost(
+            @PathVariable String postTitle,
+            @RequestBody @Valid TagDto request,
+            @RequestHeader("Authorization") String bearerToken
+    ) {
+        return ResponseEntity.ok(service.deleteTagFromPost(postTitle, request, bearerToken));
+    }
 }

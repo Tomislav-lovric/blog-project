@@ -112,4 +112,20 @@ public class GlobalExceptionHandler {
         return errorMap;
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({PostAlreadyContainsThatTagException.class})
+    public Map<String, String> handleExistingPostTag(PostAlreadyContainsThatTagException ex) {
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("Error", ex.getMessage());
+        return errorMap;
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler({PostDoesNotContainThatTagException.class})
+    public Map<String, String> handleNonExistingPostTag(PostDoesNotContainThatTagException ex) {
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("Error", ex.getMessage());
+        return errorMap;
+    }
+
 }
