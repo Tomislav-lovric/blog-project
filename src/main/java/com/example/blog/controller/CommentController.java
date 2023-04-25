@@ -42,4 +42,23 @@ public class CommentController {
         return ResponseEntity.ok(service.getAllComments(postTitle));
     }
 
+    @PutMapping("/{postTitle}/comments/{commentId}/update")
+    public ResponseEntity<CommentResponse> updateComment(
+            @PathVariable String postTitle,
+            @PathVariable Long commentId,
+            @RequestBody @Valid CommentRequest request,
+            @RequestHeader("Authorization") String bearerToken
+    ) {
+        return ResponseEntity.ok(service.updateComment(postTitle, commentId, request, bearerToken));
+    }
+
+    @DeleteMapping("/{postTitle}/comments/{commentId}/delete")
+    public ResponseEntity<String> deleteComment(
+            @PathVariable String postTitle,
+            @PathVariable Long commentId,
+            @RequestHeader("Authorization") String bearerToken
+    ) {
+        return ResponseEntity.ok(service.deleteComment(postTitle, commentId, bearerToken));
+    }
+
 }
