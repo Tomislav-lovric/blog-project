@@ -126,8 +126,6 @@ public class PostService {
 
         var post = postRepository.findByTitle(postTitle);
 
-        //todo probably should make it, so it returns categories and tags also
-        // should note that will require to update PostResponse Class
         return PostResponse.builder()
                 .title(post.getTitle())
                 .content(post.getContent())
