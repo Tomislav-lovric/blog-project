@@ -247,15 +247,20 @@ public class PostService {
                         .build()).toList();
     }
 
-    private List<String> getTags(Post post) {
-        var postTags = postTagRepository.findByPost(post);
-        return postTags.stream().map(postTag -> postTag.getTag().getName()).toList();
-    }
-
+    //Two simple methods to extract categories and tags from our db, so they can
+    //be used in the PostResponse
+    //All they do is use post to find all postCategories/postTags (our bridge table obj) which have the
+    //said post, then we stream through that list and return just the names of categories/tags that
+    //the said post contains (is connected to)
     private List<String> getCategories(Post post) {
         var postCategories = postCategoryRepository.findByPost(post);
         return postCategories.stream()
                 .map(postCategory -> postCategory.getCategory().getName())
                 .toList();
+    }
+
+    private List<String> getTags(Post post) {
+        var postTags = postTagRepository.findByPost(post);
+        return postTags.stream().map(postTag -> postTag.getTag().getName()).toList();
     }
 }
