@@ -17,4 +17,6 @@ public interface PostTagRepository extends JpaRepository<PostTag, PostTagId> {
     PostTag findByPostAndTag(Post post, Tag tag);
 
     List<PostTag> findByPost(Post post);
+
+    List<PostTag> findByTag(Tag tag);
 }

@@ -7,6 +7,7 @@ import com.example.blog.entity.*;
 import com.example.blog.exception.CategoryNotFoundException;
 import com.example.blog.exception.PostNotFoundException;
 import com.example.blog.exception.PostTitleAlreadyExistsException;
+import com.example.blog.exception.TagNotFoundException;
 import com.example.blog.repository.*;
 import com.example.blog.security.JwtService;
 import jakarta.transaction.Transactional;
@@ -206,6 +207,46 @@ public class PostService {
         postRepository.deleteByTitleAndUser(postTitle, user);
 
         return "Post with the title '" + postTitle + "' deleted";
+    }
+
+    public List<PostResponse> getAllPostsByCategory(String categoryName) {
+        if (!categoryRepository.existsByName(categoryName)) {
+            throw new CategoryNotFoundException("Category by the name " + categoryName + " not found!");
+        }
+
+        var category = categoryRepository.findByName(categoryName);
+        List<Post> posts = postCategoryRepository.findByCategory(category).stream()
+                .map(PostCategory::getPost)
+                .toList();
+
+        return posts.stream()
+                .map(post -> PostResponse.builder()
+                        .title(post.getTitle())
+                        .content(post.getContent())
+                        .categories(getCategories(post))
+                        .tags(getTags(post))
+                        .createdAt(post.getCreatedAt())
+                        .updatedAt(post.getUpdatedAt())
+                        .build()).toList();
+    }
+
+    public List<PostResponse> getAllPostsByTag(String tagName) {
+        if (!tagRepository.existsByName(tagName)) {
+            throw new TagNotFoundException("Tag by the name " + tagName + " not found!");
+        }
+
+        var tag = tagRepository.findTagByName(tagName);
+        List<Post> posts = postTagRepository.findByTag(tag).stream().map(PostTag::getPost).toList();
+
+        return posts.stream()
+                .map(post -> PostResponse.builder()
+                        .title(post.getTitle())
+                        .content(post.getContent())
+                        .categories(getCategories(post))
+                        .tags(getTags(post))
+                        .createdAt(post.getCreatedAt())
+                        .updatedAt(post.getUpdatedAt())
+                        .build()).toList();
     }
 
     private List<String> getTags(Post post) {

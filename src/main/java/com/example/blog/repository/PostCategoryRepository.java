@@ -17,4 +17,6 @@ public interface PostCategoryRepository extends JpaRepository<PostCategory, Post
     PostCategory findByPostAndCategory(Post post, Category category);
 
     List<PostCategory> findByPost(Post post);
+
+    List<PostCategory> findByCategory(Category category);
 }

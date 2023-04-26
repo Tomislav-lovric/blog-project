@@ -27,6 +27,8 @@ public class SecurityConfiguration {
                 .requestMatchers(
                         "/api/v1/user/**",
                         "/api/v1/posts/all",
+                        "/api/v1/posts/all-by-category",
+                        "/api/v1/posts/all-by-tag",
                         "/api/v1/posts/{postTitle}",
                         "/api/v1/posts/categories/search",
                         "/api/v1/posts/categories/all",

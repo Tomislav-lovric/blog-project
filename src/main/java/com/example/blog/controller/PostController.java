@@ -58,6 +58,18 @@ public class PostController {
         return ResponseEntity.ok(service.deletePost(postTitle, bearerToken));
     }
 
-    //todo Maybe make an endpoints for searching for posts based on their categories or tags
+    @GetMapping("/all-by-category")
+    public ResponseEntity<List<PostResponse>> getAllPostsByCategory(
+            @RequestParam String categoryName
+    ) {
+        return ResponseEntity.ok(service.getAllPostsByCategory(categoryName));
+    }
+
+    @GetMapping("/all-by-tag")
+    public ResponseEntity<List<PostResponse>> getAllPostsByTag(
+            @RequestParam String tagName
+    ) {
+        return ResponseEntity.ok(service.getAllPostsByTag(tagName));
+    }
 
 }
