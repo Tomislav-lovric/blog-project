@@ -7,10 +7,7 @@ import com.example.blog.entity.*;
 import com.example.blog.exception.CategoryNotFoundException;
 import com.example.blog.exception.PostNotFoundException;
 import com.example.blog.exception.PostTitleAlreadyExistsException;
-import com.example.blog.repository.CategoryRepository;
-import com.example.blog.repository.PostRepository;
-import com.example.blog.repository.TagRepository;
-import com.example.blog.repository.UserRepository;
+import com.example.blog.repository.*;
 import com.example.blog.security.JwtService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +27,8 @@ public class PostService {
     private final CategoryRepository categoryRepository;
     private final TagRepository tagRepository;
     private final JwtService jwtService;
+    private final PostCategoryRepository postCategoryRepository;
+    private final PostTagRepository postTagRepository;
 
     //Quite few things are happening in this method therefore there may be more comments
     //than usual just to explain what is happening (or should I say what I was thinking
@@ -111,6 +110,8 @@ public class PostService {
         return PostResponse.builder()
                 .title(post.getTitle())
                 .content(post.getContent())
+                .categories(getCategories(post))
+                .tags(getTags(post))
                 .createdAt(post.getCreatedAt())
                 .updatedAt(post.getUpdatedAt())
                 .build();
@@ -129,6 +130,8 @@ public class PostService {
         return PostResponse.builder()
                 .title(post.getTitle())
                 .content(post.getContent())
+                .categories(getCategories(post))
+                .tags(getTags(post))
                 .createdAt(post.getCreatedAt())
                 .updatedAt(post.getUpdatedAt())
                 .build();
@@ -140,6 +143,8 @@ public class PostService {
                 .map(post -> PostResponse.builder()
                         .title(post.getTitle())
                         .content(post.getContent())
+                        .categories(getCategories(post))
+                        .tags(getTags(post))
                         .createdAt(post.getCreatedAt())
                         .updatedAt(post.getUpdatedAt())
                         .build()).toList();
@@ -182,6 +187,8 @@ public class PostService {
         return PostResponse.builder()
                 .title(post.getTitle())
                 .content(post.getContent())
+                .categories(getCategories(post))
+                .tags(getTags(post))
                 .createdAt(post.getCreatedAt())
                 .updatedAt(post.getUpdatedAt())
                 .build();
@@ -199,5 +206,17 @@ public class PostService {
         postRepository.deleteByTitleAndUser(postTitle, user);
 
         return "Post with the title '" + postTitle + "' deleted";
+    }
+
+    private List<String> getTags(Post post) {
+        var postTags = postTagRepository.findByPost(post);
+        return postTags.stream().map(postTag -> postTag.getTag().getName()).toList();
+    }
+
+    private List<String> getCategories(Post post) {
+        var postCategories = postCategoryRepository.findByPost(post);
+        return postCategories.stream()
+                .map(postCategory -> postCategory.getCategory().getName())
+                .toList();
     }
 }
