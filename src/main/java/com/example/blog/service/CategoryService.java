@@ -65,6 +65,7 @@ public class CategoryService {
 
         var category = categoryRepository.findByName(categoryName);
         category.setName(request.getName());
+        categoryRepository.save(category);
 
         return "Category '" + categoryName + "' changed/updated to '" + request.getName() + "'";
     }
