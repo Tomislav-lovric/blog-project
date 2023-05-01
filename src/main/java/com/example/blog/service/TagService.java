@@ -64,7 +64,7 @@ public class TagService {
 
         var tag = tagRepository.findTagByName(tagName);
         tag.setName(request.getName());
-
+        tagRepository.save(tag);
 
         return "Tag '" + tagName + "' changed/updated to '" + request.getName() + "'";
     }
