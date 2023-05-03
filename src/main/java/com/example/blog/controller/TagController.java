@@ -78,7 +78,7 @@ public class TagController {
             @RequestHeader("Authorization") String bearerToken
     ) {
         request.forEach(tagDto -> service.addTagToPost(postTitle, tagDto, bearerToken));
-        return ResponseEntity.ok("All categories added to the post '" + postTitle + "'");
+        return ResponseEntity.ok("All tags added to the post '" + postTitle + "'");
     }
 
     @DeleteMapping("/{postTitle}/tags/delete")
