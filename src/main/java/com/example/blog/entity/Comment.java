@@ -54,14 +54,22 @@ public class Comment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "user_id",
-            nullable = false
+            nullable = false,
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(
+                    name = "comment_user_id_fk"
+            )
     )
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "post_id",
-            nullable = false
+            nullable = false,
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(
+                    name = "comment_post_id_fk"
+            )
     )
     private Post post;
 

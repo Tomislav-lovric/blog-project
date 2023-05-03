@@ -19,10 +19,22 @@ public class PostCategory {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("postId")
+    @JoinColumn(
+            name = "post_id",
+            foreignKey = @ForeignKey(
+                    name = "post_categories_post_id_fk"
+            )
+    )
     private Post post;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("categoryId")
+    @JoinColumn(
+            name = "category_id",
+            foreignKey = @ForeignKey(
+                    name = "post_categories_category_id_fk"
+            )
+    )
     private Category category;
 
 }

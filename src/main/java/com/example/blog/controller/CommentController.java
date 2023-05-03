@@ -27,6 +27,7 @@ public class CommentController {
         return new ResponseEntity<>(service.createComment(postTitle, request, bearerToken), HttpStatus.CREATED);
     }
 
+    //Not secured endpoint
     @GetMapping("/{postTitle}/comments/{commentId}")
     public ResponseEntity<CommentResponse> getComment(
             @PathVariable String postTitle,
@@ -35,6 +36,7 @@ public class CommentController {
         return ResponseEntity.ok(service.getComment(postTitle, commentId));
     }
 
+    //Not secured endpoint
     @GetMapping("/{postTitle}/comments/all")
     public ResponseEntity<List<CommentResponse>> getAllComments(
             @PathVariable String postTitle

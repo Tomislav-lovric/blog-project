@@ -19,10 +19,22 @@ public class PostTag {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("postId")
+    @JoinColumn(
+            name = "post_id",
+            foreignKey = @ForeignKey(
+                    name = "post_tags_post_id_fk"
+            )
+    )
     private Post post;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("tagId")
+    @JoinColumn(
+            name = "tag_id",
+            foreignKey = @ForeignKey(
+                    name = "post_tags_tag_id_fk"
+            )
+    )
     private Tag tag;
 
 }
