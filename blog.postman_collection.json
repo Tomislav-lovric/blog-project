@@ -1,0 +1,1088 @@
+{
+	"info": {
+		"_postman_id": "43f669d5-9c21-46d9-b285-e469981d1108",
+		"name": "blog",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"test\",\r\n    \"lastName\": \"test\",\r\n    \"email\": \"mailzabacit.123@gmail.com\",\r\n    \"password\": \"Test.123\",\r\n    \"repeatPassword\": \"Test.123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/user/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"mailzabacit.123@gmail.com\",\r\n    \"password\": \"Test.123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/user/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Post",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWlsemFiYWNpdC4xMjNAZ21haWwuY29tIiwiaWF0IjoxNjgyMDA2MTkxLCJleHAiOjE2ODIwMDk3OTF9.gBP407zt_JJtanJVOEZALP-esfWTL7MtOK4TjNKNuEk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"test\",\r\n    \"content\": \"test\",\r\n    \"categories\": [\"a\"],\r\n    \"tags\": [\"tag2\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Post",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Posts",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Post",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWlsemFiYWNpdC4xMjNAZ21haWwuY29tIiwiaWF0IjoxNjgyMDkyNjgyLCJleHAiOjE2ODIwOTYyODJ9.UWdZ0yFRE7iF8_um5hSoHlfjfR64Dzwvw7esklGKnOs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"test\",\r\n    \"content\": \"content1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/update/test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"update",
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Post",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWlsemFiYWNpdC4xMjNAZ21haWwuY29tIiwiaWF0IjoxNjgyMDA2MTkxLCJleHAiOjE2ODIwMDk3OTF9.gBP407zt_JJtanJVOEZALP-esfWTL7MtOK4TjNKNuEk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Category",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWlsemFiYWNpdC4xMjNAZ21haWwuY29tIiwiaWF0IjoxNjgyMjY5MzI3LCJleHAiOjE2ODIyNzI5Mjd9.Qlz6wy5PsIzlDfP_pXunJJ_E6wdgGrE_WQRG7B3agFQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"category\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/categories/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"categories",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Posts By Category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/all-by-category?categoryName=category",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"all-by-category"
+					],
+					"query": [
+						{
+							"key": "categoryName",
+							"value": "category"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Posts By Tag",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/all-by-tag?tagName=tag2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"all-by-tag"
+					],
+					"query": [
+						{
+							"key": "tagName",
+							"value": "tag2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Multiple Categories",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWlsemFiYWNpdC4xMjNAZ21haWwuY29tIiwiaWF0IjoxNjgyMzUyOTM4LCJleHAiOjE2ODIzNTY1Mzh9.gUgF7rXrC_zOP4OeHbywTq7aXK6YJK2-Xa4CrnCw7qE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"name\": \"category1\"\r\n    },\r\n    {\r\n        \"name\": \"category2\"\r\n    },\r\n    {\r\n        \"name\": \"category3\"\r\n    },\r\n    {\r\n        \"name\": \"category4\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/categories/create-multi",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"categories",
+						"create-multi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Categories",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/categories/search?category=category2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"categories",
+						"search"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "category2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Categories",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/categories/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"categories",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update/Change Category",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWlsemFiYWNpdC4xMjNAZ21haWwuY29tIiwiaWF0IjoxNjgyMjY5MzI3LCJleHAiOjE2ODIyNzI5Mjd9.Qlz6wy5PsIzlDfP_pXunJJ_E6wdgGrE_WQRG7B3agFQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"something\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/categories/update/category2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"categories",
+						"update",
+						"category2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Category",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWlsemFiYWNpdC4xMjNAZ21haWwuY29tIiwiaWF0IjoxNjgyMjY5NDgzLCJleHAiOjE2ODIyNzMwODN9.ok48krpRSCsoNzVCo6qsZJ6GIta4DLd9ERDZ38bd3os",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/categories/delete/category",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"categories",
+						"delete",
+						"category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Category To Post",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWlsemFiYWNpdC4xMjNAZ21haWwuY29tIiwiaWF0IjoxNjgyMzUwNDg3LCJleHAiOjE2ODIzNTQwODd9.h0L4V2RtvgHHLRxkMfscUn_fAVhLQCJhLQ1w1Oht2aM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"category\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/test/categories/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"test",
+						"categories",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Multiple Categories To Post",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWlsemFiYWNpdC4xMjNAZ21haWwuY29tIiwiaWF0IjoxNjgyMzUyOTM4LCJleHAiOjE2ODIzNTY1Mzh9.gUgF7rXrC_zOP4OeHbywTq7aXK6YJK2-Xa4CrnCw7qE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"name\": \"category2\"\r\n    },\r\n    {\r\n        \"name\": \"category3\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/test/categories/add-multi",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"test",
+						"categories",
+						"add-multi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Category From Post",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWlsemFiYWNpdC4xMjNAZ21haWwuY29tIiwiaWF0IjoxNjgyMzUyOTM4LCJleHAiOjE2ODIzNTY1Mzh9.gUgF7rXrC_zOP4OeHbywTq7aXK6YJK2-Xa4CrnCw7qE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"category\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/test/categories/delete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"test",
+						"categories",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Tag",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWlsemFiYWNpdC4xMjNAZ21haWwuY29tIiwiaWF0IjoxNjgyMzU3MTc1LCJleHAiOjE2ODIzNjA3NzV9.1T7chPICGiK635nexWoj_AsoY6_seDl8SUs2jyKjxZI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"tag\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/tags/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"tags",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Multiple Tags",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWlsemFiYWNpdC4xMjNAZ21haWwuY29tIiwiaWF0IjoxNjgyMzU3MTc1LCJleHAiOjE2ODIzNjA3NzV9.1T7chPICGiK635nexWoj_AsoY6_seDl8SUs2jyKjxZI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"name\": \"tag1\"\r\n    },\r\n    {\r\n        \"name\": \"tag2\"\r\n    },\r\n    {\r\n        \"name\": \"tag3\"\r\n    },\r\n    {\r\n        \"name\": \"tag4\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/tags/create-multi",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"tags",
+						"create-multi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Tags",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/tags/search?tag=tag2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"tags",
+						"search"
+					],
+					"query": [
+						{
+							"key": "tag",
+							"value": "tag2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Tags",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/tags/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"tags",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update/Change Tag",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWlsemFiYWNpdC4xMjNAZ21haWwuY29tIiwiaWF0IjoxNjgyMzU3MTc1LCJleHAiOjE2ODIzNjA3NzV9.1T7chPICGiK635nexWoj_AsoY6_seDl8SUs2jyKjxZI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/tags/update/tag",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"tags",
+						"update",
+						"tag"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Tag",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWlsemFiYWNpdC4xMjNAZ21haWwuY29tIiwiaWF0IjoxNjgyMzU3MTc1LCJleHAiOjE2ODIzNjA3NzV9.1T7chPICGiK635nexWoj_AsoY6_seDl8SUs2jyKjxZI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/tags/delete/tag2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"tags",
+						"delete",
+						"tag2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Tag To Post",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWlsemFiYWNpdC4xMjNAZ21haWwuY29tIiwiaWF0IjoxNjgyNDM0MDg2LCJleHAiOjE2ODI0Mzc2ODZ9.v2VVMWK33op1M856ZS_wvPpa0UqreMWCibMtQ35xGaA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"new tag\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/test/tags/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"test",
+						"tags",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Multiple Tags To Post",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWlsemFiYWNpdC4xMjNAZ21haWwuY29tIiwiaWF0IjoxNjgyNDM0MDg2LCJleHAiOjE2ODI0Mzc2ODZ9.v2VVMWK33op1M856ZS_wvPpa0UqreMWCibMtQ35xGaA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"name\": \"new tag1\"\r\n    },\r\n    {\r\n        \"name\": \"new tag2\"\r\n    },\r\n    {\r\n        \"name\": \"new tag3\"\r\n    },\r\n    {\r\n        \"name\": \"new tag4\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/test/tags/add-multi",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"test",
+						"tags",
+						"add-multi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Tag From Post",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWlsemFiYWNpdC4xMjNAZ21haWwuY29tIiwiaWF0IjoxNjgyNDM0MDg2LCJleHAiOjE2ODI0Mzc2ODZ9.v2VVMWK33op1M856ZS_wvPpa0UqreMWCibMtQ35xGaA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"new tag3\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/test/tags/delete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"test",
+						"tags",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Comment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWlsemFiYWNpdC4xMjNAZ21haWwuY29tIiwiaWF0IjoxNjgyNDM5MTE0LCJleHAiOjE2ODI0NDI3MTR9.LLlWOj7ZH_OsJT1R3keaVxiRpIjtCpFCq0WiPQ5mTCg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"content\": \"This is a comment\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/test/comments/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"test",
+						"comments",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Comment",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/test/comments/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"test",
+						"comments",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Comments",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts/test/comments/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"test",
+						"comments",
+						"all"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
